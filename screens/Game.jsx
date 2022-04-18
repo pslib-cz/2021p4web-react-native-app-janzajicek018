@@ -1,23 +1,23 @@
-import * as React from "react";
-import { Text, View } from "react-native";
+import { Text, View, Image } from "react-native";
 import SafeAreaView from "react-native-safe-area-view";
-import { useState } from "react";
-import Pressable from "react-native";
+import Pressable from "react-native/Libraries/Components/Pressable/Pressable";
+import React, { useState } from 'react';
 
 export const Game = (props) => {
-  const [timesPressed, setTimesPressed] = useState(0);
   return (
     <SafeAreaView
-      style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      style={{ flex: 1, justifyContent: "center", alignItems: "center", height: '100%', width: '100%'}}
     >
-      <Text>Game!</Text>
+      {props.hasWon ? <Text style={{fontSize: 30}}>You won!</Text> : <Text></Text>}
       <Pressable
         onPress={() => {
-          setTimesPressed(() => {timesPressed = timesPressed + 1});
+          props.setTimesPressed((current) => (current + 1 * props.clickModifier));
         }}
       >
-        <Text>Press</Text>
+        <Image style={{height: 200, width: 230}} source={require('../assets/React-icon.svg')}></Image>
       </Pressable>
+      <Text>{props.timesPressed.toFixed(2)} Atoms</Text>  
+      <Text>{props.clickModifier.toFixed(2)} Click Power</Text>  
     </SafeAreaView>
   );
 };

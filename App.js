@@ -8,17 +8,22 @@ import {
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useColorScheme } from "react-native";
+import { useState } from "react";
 
-import Home from "./screens/Home";
+import Shop from "./screens/Shop";
 import Game from "./screens/Game";
 
-export const SCREEN_HOME = "Home";
 export const SCREEN_GAME = "Game";
+export const SCREEN_SHOP = "Shop";
 
 const Tab = createBottomTabNavigator();
 
 export default function App() {
   const scheme = useColorScheme();
+  const [timesPressed, setTimesPressed] = useState(0);
+  const [clickModifier, setClickModifier] = useState(1);
+  const [hasWon, setHasWon] = useState(false);
+
   return (
     <NavigationContainer theme={scheme === "dark" ? DarkTheme : DefaultTheme}>
       <StatusBar backgroundColor="#f4511e" hidden={true} translucent={true} />
@@ -27,7 +32,7 @@ export default function App() {
           tabBarIcon: ({ focused, color, size }) => {
             let iconName;
             switch (route.name) {
-              case SCREEN_HOME:
+              case SCREEN_GAME:
                 iconName = "home-sharp";
                 break;
               default:
@@ -40,21 +45,22 @@ export default function App() {
         })}
       >
         <Tab.Screen
-          name={SCREEN_HOME}
-          component={Home}
-          options={{
-            title: "Home",
-            headerStyle: { backgroundColor: "#f4511e" },
-            headerTitleStyle: { color: "#dddddd" },
-          }}
-        />
-        <Tab.Screen
           name={SCREEN_GAME}
-          component={Game}
+          children={()=><Game timesPressed={timesPressed} setTimesPressed={setTimesPressed} clickModifier={clickModifier} hasWon={hasWon}/>}
           options={{
             title: "Game",
             headerStyle: { backgroundColor: "#f4511e" },
+            headerTitleStyle: { color: "#dddddd" },
             headerShown: false,
+          }}
+        />
+        <Tab.Screen
+          name={SCREEN_SHOP}
+          children={()=><Shop timesPressed={timesPressed} setTimesPressed={setTimesPressed} setClickModifier={setClickModifier} clickModifier={clickModifier} hasWon={hasWon} setHasWon={setHasWon}/>}
+          options={{
+            title: "Shop",
+            headerStyle: { backgroundColor: "#f4511e" },
+            headerShown: true,
           }}
         />
       </Tab.Navigator>

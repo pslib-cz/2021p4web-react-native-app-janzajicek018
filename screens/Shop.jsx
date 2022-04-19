@@ -30,9 +30,17 @@ export const Shop = (props) => {
         timesPressed={props.timesPressed}
         setTimesPressed={props.setTimesPressed}
         setClickModifier={props.setClickModifier}
+        name={"10x Tap Power"}
+        price={5000}
+        tileType={3}
+      ></ShopTile>
+      <ShopTile
+        timesPressed={props.timesPressed}
+        setTimesPressed={props.setTimesPressed}
+        setClickModifier={props.setClickModifier}
         setHasWon={props.setHasWon}
         name={"Sacrifice Tap Power"}
-        price={1}
+        price={1000000}
         tileType={5}
       ></ShopTile>
       {props.hasWon ? <Text style={{fontSize: 30}}>You won!</Text> : <Text></Text>}

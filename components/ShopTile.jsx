@@ -18,7 +18,7 @@ export const ShopTile = (props) => {
                 break;
               case 2:
                 let num = Math.floor(Math.random() * 100) + 1;
-                if (num >= 35) {
+                if (num >= 50) {
                   props.setTimesPressed((current) => current * 2);
                   SetPrice((current) => current + 10);
                 } else {
@@ -28,11 +28,15 @@ export const ShopTile = (props) => {
                 props.setTimesPressed((current) => current - price);
                 break;
               case 3:
+                props.setTimesPressed((current) => current - price);
+                SetPrice((current) => current * 5);
+                props.setClickModifier((current) => current * 10);
                 break;
               case 4:
                 break;
               case 5:
-                props.setTimesPressed((current) => current - price);
+                props.setTimesPressed((current) => 0);
+                props.setClickModifier((current) => 0)
                 SetPrice((current) => 99999999);
                 props.setHasWon((current) => true);
                 break;

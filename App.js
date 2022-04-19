@@ -35,6 +35,9 @@ export default function App() {
               case SCREEN_GAME:
                 iconName = "home-sharp";
                 break;
+              /*case SCREEN_SHOP:
+                iconName = "bag-sharp"
+                break;*/
               default:
                 iconName = "information-circle";
             }
